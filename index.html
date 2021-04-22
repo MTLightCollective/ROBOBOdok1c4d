@@ -11,11 +11,11 @@
                 init: function () {
                     var marker = this.el;
                     this.vid = document.querySelector("#vid");
-                    marker.addEventListener('markerFound', () => {
+                    marker.addEventListener('markerFound', function () {
                         this.toggle = true;
                         this.vid.play();
                     }.bind(this));
-                    marker.addEventListener('markerLost', () => {
+                    marker.addEventListener('markerLost', function () {
                         this.toggle = false;
                         this.vid.pause();
                     }.bind(this));
@@ -39,7 +39,11 @@
                     id="animated-asset"
                     src="assets/asset.gltf"
                 ></a-asset-item>
-                
+                <a-asset-item
+                    id="sound"
+                    src="assets/audio.mp3"
+                    response-type="arraybuffer"
+                ></a-asset-item>                
             </a-assets>
                       
             <a-marker
@@ -51,7 +55,8 @@
                 emitevents="true"
                 cursor="fuse: false; rayOrigin: mouse;"
                 id="markerA"
-            >
+            ></a-marker>
+            
                 <a-entity
                     id="bowser-model"
                     scale="0.12528680019151253 0.12528680019151253 0.12528680019151253"
@@ -60,13 +65,14 @@
                     class="clickable"
                     gesture-handler
                 ></a-entity>
-            </a-marker>
+            
             <a-entity
                 audiohandler
                 id="sound-entity"
-                sound="assets/audio.mp3"
+                sound="src: #sound"
                 autoplay="false"
             ></a-entity>
+            
             <a-entity camera></a-entity>
         </a-scene>
        
